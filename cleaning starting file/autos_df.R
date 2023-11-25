@@ -30,13 +30,50 @@ seller_counts <- df %>%
 
 print(seller_counts)
 
-# Changing values from German to English
-
+# Changing values from German to English in seller column
 df <- df %>%
   mutate(seller = ifelse(seller == "privat", "private", ifelse(seller == "gewerblich", "commercial", seller)))
 
 # Showing unique values from seller column to check if they were changed successfully
-
 unique_sellers <- unique(df$seller)
 print(unique_sellers)
 
+# mutate() is used to modify the "price" column in the dataframe.
+# gsub("[\\$,]", "", price) is used to remove both "$" and "," symbols from the "price" column. 
+# The result is then converted to a numeric format using as.numeric()
+df <- df %>%
+  mutate(price = as.numeric(gsub("[\\$,]", "", price)))
+
+# Renaming price column to price_in_USD
+df <- df %>%
+  rename(price_in_USD = price)
+
+# summary of the unique values in the offerType column along with their counts
+offerType_counts <- df %>%
+  count(offerType)
+
+print(offerType_counts)
+
+# Changing values from German to English in offerType column
+df <- df %>%
+  mutate(offerType = ifelse(offerType == "Angebot", "Offer", ifelse(offerType == "Gesuch", "Want", offerType)))
+
+# summary of the unique values in the nrOfPictures column along with their counts
+nrOfPictures_counts <- df %>%
+  count(nrOfPictures)
+
+print(nrOfPictures_counts)
+
+# Dropping nrOfPictures column
+df <- df %>%
+  select(-nrOfPictures)
+
+View(df)
+
+# Replacing _ sign with a space to improve readability in name column
+df <- df %>%
+  mutate(name = str_replace_all(name, "_", " "))
+
+# Renaming name column to car_model
+df <- df %>%
+  rename(car_model = name)
