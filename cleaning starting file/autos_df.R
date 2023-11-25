@@ -68,6 +68,10 @@ print(nrOfPictures_counts)
 df <- df %>%
   select(-nrOfPictures)
 
+# Dropping nrOfPictures column
+df <- df %>%
+  select(-nrOfPictures)
+
 View(df)
 
 # Replacing _ sign with a space to improve readability in name column
@@ -77,3 +81,13 @@ df <- df %>%
 # Renaming name column to car_model
 df <- df %>%
   rename(car_model = name)
+
+# Exchange rate 25.11.2023.
+exchange_rate <- 0.91
+
+# Convert the 'price' column from dollars to euros and overwrite the original column
+df$price_in_USD <- df$price_in_USD * exchange_rate
+
+# Renaming price_in_USD column to price_in_EUR
+df <- df %>%
+  rename(price_in_EUR = price_in_USD)
