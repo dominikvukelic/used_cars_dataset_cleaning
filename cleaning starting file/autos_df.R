@@ -68,12 +68,6 @@ print(nrOfPictures_counts)
 df <- df %>%
   select(-nrOfPictures)
 
-# Dropping nrOfPictures column
-df <- df %>%
-  select(-nrOfPictures)
-
-View(df)
-
 # Replacing _ sign with a space to improve readability in name column
 df <- df %>%
   mutate(name = str_replace_all(name, "_", " "))
