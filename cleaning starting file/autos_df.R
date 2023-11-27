@@ -1,4 +1,4 @@
-# importing necessary libraries
+# Importing necessary libraries
 library(tidyverse)
 
 # Specify the relative path to your dataset within the project
@@ -25,7 +25,7 @@ num_unique_sellers <- df %>%
 # Showing the number of unique values in seller column
 cat("Number of unique values in seller column:", num_unique_sellers, "\n")
 
-# summary of the unique values in the seller column along with their counts
+# Summary of the unique values in the seller column along with their counts
 seller_counts <- df %>%
   count(seller)
 
@@ -49,7 +49,7 @@ df <- df %>%
 df <- df %>%
   rename(price_in_USD = price)
 
-# summary of the unique values in the offerType column along with their counts
+# Summary of the unique values in the offerType column along with their counts
 offerType_counts <- df %>%
   count(offerType)
 
@@ -80,14 +80,14 @@ df <- df %>%
 # Exchange rate 25.11.2023.
 exchange_rate <- 0.91
 
-# Convert the 'price' column from dollars to euros and overwrite the original column
+# Converting the 'price' column from dollars to euros and overwrite the original column
 df$price_in_USD <- df$price_in_USD * exchange_rate
 
 # Renaming price_in_USD column to price_in_EUR
 df <- df %>%
   rename(price_in_EUR = price_in_USD)
 
-# summary of the unique values in the vehicleType column along with their counts
+# Summary of the unique values in the vehicleType column along with their counts
 vehicleType_counts <- df %>%
   count(vehicleType)
 
@@ -106,23 +106,59 @@ df <- df %>%
   )
 
 
-# Remove rows where vehicleType is NA
+# Removing rows where vehicleType is NA
 df <- na.omit(df, cols = "vehicleType")
 
-# Use mutate to change "andere" to "other" in the model column
+# Using mutate to change "andere" to "other" in the model column
 df <- df %>%
   mutate(model = ifelse(model == "andere", "other", model))
 
-View(df)
-
-# summary of the unique values in the gearbox column along with their counts
+# Summary of the unique values in the gearbox column along with their counts
 gearbox_counts <- df %>%
   count(gearbox)
 
 print(gearbox_counts)
 
-
 # Changing values from German to English in gearbox column
 df <- df %>%
   mutate(gearbox = ifelse(gearbox == "automatik", "automatic", ifelse(gearbox == "manuell", "manual", gearbox)))
 
+# Using mutate and gsub to remove "km" from the odometer column values
+df <- df %>%
+  mutate(odometer = gsub("km", "", odometer))
+
+# Renaming odometer column to odometer_in_km
+df <- df %>%
+  rename(odometer_in_km = odometer)
+
+# Summary of the unique values in the notRepairedDamage column along with their counts
+notRepairedDamage_counts <- df %>%
+  count(notRepairedDamage)
+
+print(notRepairedDamage_counts)
+
+# Changing values from German to English in gearbox column
+df <- df %>%
+  mutate(notRepairedDamage = ifelse(notRepairedDamage == "nein", "no", ifelse(notRepairedDamage == "ja", "yes", notRepairedDamage)))
+
+View(df)
+
+# Summary of the unique values in the fuelType column along with their counts
+fuelType_counts <- df %>%
+  count(fuelType)
+
+print(fuelType_counts)
+
+# Changing values from German to English in fuelType column
+
+df <- df %>%
+  mutate(
+    fuelType = case_when(
+      fuelType == "andere" ~ "other",
+      fuelType == "benzin" ~ "petrol",
+      fuelType == "cng" ~ "compressed_natural_gas",
+      fuelType == "elektro" ~ "electric",
+      fuelType == "lpg" ~ "liqefied_petroleum_gas",
+      TRUE ~ fuelType  # Keep other values unchanged
+    )
+  )
