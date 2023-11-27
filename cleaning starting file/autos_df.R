@@ -1,10 +1,11 @@
+# importing necessary libraries
 library(tidyverse)
 
 # Specify the relative path to your dataset within the project
 dataset_path <- "starting file/autos.csv"
 
-# Import the dataset using read.csv or appropriate function
-df <- read.csv(dataset_path)
+# Import the dataset using read.csv with a.strings parameter to indicate the values that should be treated as missing (blank)
+df <- read.csv(dataset_path, na.strings = c("", "NA"))
 
 # View the contents of a dataframe
 View(df)
@@ -56,7 +57,7 @@ print(offerType_counts)
 
 # Changing values from German to English in offerType column
 df <- df %>%
-  mutate(offerType = ifelse(offerType == "Angebot", "Offer", ifelse(offerType == "Gesuch", "Want", offerType)))
+  mutate(offerType = ifelse(offerType == "Angebot", "Seling", ifelse(offerType == "Gesuch", "Buying", offerType)))
 
 # summary of the unique values in the nrOfPictures column along with their counts
 nrOfPictures_counts <- df %>%
@@ -72,9 +73,9 @@ df <- df %>%
 df <- df %>%
   mutate(name = str_replace_all(name, "_", " "))
 
-# Renaming name column to car_model
+# Renaming name column to short_car_description
 df <- df %>%
-  rename(car_model = name)
+  rename(short_car_description = name)
 
 # Exchange rate 25.11.2023.
 exchange_rate <- 0.91
@@ -85,3 +86,43 @@ df$price_in_USD <- df$price_in_USD * exchange_rate
 # Renaming price_in_USD column to price_in_EUR
 df <- df %>%
   rename(price_in_EUR = price_in_USD)
+
+# summary of the unique values in the vehicleType column along with their counts
+vehicleType_counts <- df %>%
+  count(vehicleType)
+
+print(vehicleType_counts)
+
+# Changing values from German to English in vehicleType column
+
+df <- df %>%
+  mutate(
+    vehicleType = case_when(
+      vehicleType == "andere" ~ "other",
+      vehicleType == "kleinwagen" ~ "normal_car",
+      vehicleType == "kombi" ~ "van",
+      TRUE ~ vehicleType  # Keep other values unchanged
+    )
+  )
+
+
+# Remove rows where vehicleType is NA
+df <- na.omit(df, cols = "vehicleType")
+
+# Use mutate to change "andere" to "other" in the model column
+df <- df %>%
+  mutate(model = ifelse(model == "andere", "other", model))
+
+View(df)
+
+# summary of the unique values in the gearbox column along with their counts
+gearbox_counts <- df %>%
+  count(gearbox)
+
+print(gearbox_counts)
+
+
+# Changing values from German to English in gearbox column
+df <- df %>%
+  mutate(gearbox = ifelse(gearbox == "automatik", "automatic", ifelse(gearbox == "manuell", "manual", gearbox)))
+
