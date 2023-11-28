@@ -69,10 +69,6 @@ print(nrOfPictures_counts)
 df <- df %>%
   select(-nrOfPictures)
 
-# Replacing _ sign with a space to improve readability in name column
-df <- df %>%
-  mutate(name = str_replace_all(name, "_", " "))
-
 # Renaming name column to short_car_description
 df <- df %>%
   rename(short_car_description = name)
@@ -141,8 +137,6 @@ print(notRepairedDamage_counts)
 df <- df %>%
   mutate(notRepairedDamage = ifelse(notRepairedDamage == "nein", "no", ifelse(notRepairedDamage == "ja", "yes", notRepairedDamage)))
 
-View(df)
-
 # Summary of the unique values in the fuelType column along with their counts
 fuelType_counts <- df %>%
   count(fuelType)
@@ -162,3 +156,9 @@ df <- df %>%
       TRUE ~ fuelType  # Keep other values unchanged
     )
   )
+
+# Specifying the path for the cleaned CSV file
+cleaned_file_path <- "cleaned starting file/cleaned_autos.csv"
+
+# Writing the cleaned DataFrame to a new CSV file
+write.csv(df, file = cleaned_file_path, row.names = FALSE)
