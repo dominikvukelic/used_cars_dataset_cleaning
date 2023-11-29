@@ -33,7 +33,7 @@ df_percent <- df %>%
   summarise(count = n()) %>%
   mutate(percentage = count / sum(count) * 100)
 
-# Create a pie chart with percentages
+# Creating a pie chart with percentages
 ggplot(df_percent, aes(x = "", y = percentage, fill = gearbox)) +
   geom_bar(stat = "identity", width = 1) +
   coord_polar(theta = "y") +
@@ -42,4 +42,8 @@ ggplot(df_percent, aes(x = "", y = percentage, fill = gearbox)) +
   labs(title = "Detailed Pie Chart: Distribution of Gearbox Types with Percentages") +
   theme_void()
 
-
+# Creating a bar chart with different colors for the distribution of vehicle types
+ggplot(df, aes(x = fct_infreq(vehicleType), fill = vehicleType)) +
+  geom_bar() +
+  labs(title = "Bar Chart: Distribution of Vehicle Types with Colors", x = "Vehicle Type", y = "Frequency") +
+  theme(axis.text.x = element_text(angle = 0, hjust = 1, vjust = 1.1))
