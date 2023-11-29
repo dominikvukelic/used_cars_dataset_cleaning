@@ -3,6 +3,7 @@ library(ggplot2)
 library(tidyverse)
 library(dplyr)
 library(forcats)
+library(RColorBrewer)
 
 # Specifying the relative path to your dataset within the project
 dataset_path <- "cleaned starting file/cleaned_autos.csv"
@@ -54,3 +55,9 @@ ggplot(df, aes(x = vehicleType, fill = gearbox)) +
   labs(title = "Grouped Bar Chart: Relationship between Vehicle Type and Gearbox", x = "Vehicle Type", y = "Frequency") +
   theme(axis.text.x = element_text(angle = 0, hjust = 1, vjust = 1.1))
 
+# Creating a grouped bar chart for the relationship between powerPS and vehicleType
+ggplot(df, aes(x = vehicleType, y = powerPS, fill = vehicleType)) +
+  geom_bar(stat = "summary", fun = "mean", position = "dodge") +
+  scale_fill_brewer(palette = "Set2") +  # Set the color palette
+  labs(title = "Grouped Bar Chart: Relationship between Horsepower and Vehicle Type", x = "Vehicle Type", y = "Average Horsepower") +
+  theme(axis.text.x = element_text(angle = 0, hjust = 1, vjust = 1.1))  
