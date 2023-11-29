@@ -45,5 +45,12 @@ ggplot(df_percent, aes(x = "", y = percentage, fill = gearbox)) +
 # Creating a bar chart with different colors for the distribution of vehicle types
 ggplot(df, aes(x = fct_infreq(vehicleType), fill = vehicleType)) +
   geom_bar() +
-  labs(title = "Bar Chart: Distribution of Vehicle Types with Colors", x = "Vehicle Type", y = "Frequency") +
+  labs(title = "Bar Chart: Distribution of Vehicle Types", x = "Vehicle Type", y = "Frequency") +
   theme(axis.text.x = element_text(angle = 0, hjust = 1, vjust = 1.1))
+
+# Creating a grouped bar chart for the relationship between vehicleType and gearbox
+ggplot(df, aes(x = vehicleType, fill = gearbox)) +
+  geom_bar(position = "dodge", stat = "count") +
+  labs(title = "Grouped Bar Chart: Relationship between Vehicle Type and Gearbox", x = "Vehicle Type", y = "Frequency") +
+  theme(axis.text.x = element_text(angle = 0, hjust = 1, vjust = 1.1))
+
