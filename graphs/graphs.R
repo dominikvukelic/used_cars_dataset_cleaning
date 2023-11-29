@@ -1,6 +1,8 @@
 # Importing necessary libraries
 library(ggplot2)
 library(tidyverse)
+library(dplyr)
+library(forcats)
 
 # Specifying the relative path to your dataset within the project
 dataset_path <- "cleaned starting file/cleaned_autos.csv"
@@ -14,12 +16,30 @@ View(df)
 # Assuming there are commas in the numeric values while converting columns to numeric
 df$odometer_in_km <- as.numeric(gsub(",", "", df$odometer_in_km))
 
-# Scatter plot
+# Creating a scatter plot
 ggplot(df, aes(x = odometer_in_km, y = price_in_EUR)) +
   geom_point(alpha = 0.5, color = "blue") +
   labs(title = "Scatter Plot: Relationship between Kilometers Traveled and Car Price", x = "Kilometers Traveled", y = "Car Price")
 
+# Creating a scatter plot
+ggplot(df, aes(x = powerPS, y = price_in_EUR)) +
+  geom_point(alpha = 0.5, color = "green") +
+  labs(title = "Scatter Plot: Horsepower vs. Car Price", x = "Horsepower (powerPS)", y = "Car Price (EUR)")
 
 
+# Calculate percentages using dplyr and forcats
+df_percent <- df %>%
+  group_by(gearbox) %>%
+  summarise(count = n()) %>%
+  mutate(percentage = count / sum(count) * 100)
+
+# Create a pie chart with percentages
+ggplot(df_percent, aes(x = "", y = percentage, fill = gearbox)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  geom_text(aes(label = sprintf("%.1f%%", percentage)),
+            position = position_stack(vjust = 0.5)) +
+  labs(title = "Detailed Pie Chart: Distribution of Gearbox Types with Percentages") +
+  theme_void()
 
 
