@@ -69,7 +69,7 @@ avg_price_by_vehicle_type <- df %>%
 
 # Plotting the average price for each unique vehicle type
 ggplot(avg_price_by_vehicle_type, aes(x = vehicleType, y = avg_price, fill = vehicleType)) +
-  geom_bar(stat = "identity", position = "dodge", color = "white") +
+  geom_bar(stat = "identity", position = "dodge", color = "black") +
   labs(title = "Average Price for Different Vehicle Types",
        x = "Vehicle Type",
        y = "Average Price in EUR") +
