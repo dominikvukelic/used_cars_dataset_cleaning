@@ -60,4 +60,18 @@ ggplot(df, aes(x = vehicleType, y = powerPS, fill = vehicleType)) +
   geom_bar(stat = "summary", fun = "mean", position = "dodge") +
   scale_fill_brewer(palette = "Set2") +  # Set the color palette
   labs(title = "Grouped Bar Chart: Relationship between Horsepower and Vehicle Type", x = "Vehicle Type", y = "Average Horsepower") +
-  theme(axis.text.x = element_text(angle = 0, hjust = 1, vjust = 1.1))  
+  theme(axis.text.x = element_text(angle = 0, hjust = 1, vjust = 1.1))
+
+# Calculate average price for each unique vehicle type
+avg_price_by_vehicle_type <- df %>%
+  group_by(vehicleType) %>%
+  summarize(avg_price = mean(price_in_EUR, na.rm = TRUE))
+
+# Plotting the average price for each unique vehicle type
+ggplot(avg_price_by_vehicle_type, aes(x = vehicleType, y = avg_price, fill = vehicleType)) +
+  geom_bar(stat = "identity", position = "dodge", color = "white") +
+  labs(title = "Average Price for Different Vehicle Types",
+       x = "Vehicle Type",
+       y = "Average Price in EUR") +
+  theme_minimal() +
+  scale_fill_manual(values = rainbow(nrow(avg_price_by_vehicle_type)))
