@@ -1,35 +1,20 @@
 # Importing necessary libraries
 library(ggplot2)
-library(tidyverse)
-library(dplyr)
-library(forcats)
+library(tidyverse)  # Includes dplyr and forcats
 library(RColorBrewer)
 library(ggrepel)
+library(viridis)
 
 # Specifying the relative path to your dataset within the project
 dataset_path <- "cleaned starting file/cleaned_autos.csv"
 
-# Importing the dataset using read.csv with a.strings parameter to indicate the values that should be treated as missing (blank)
+# Importing the dataset using read.csv with na.strings parameter to indicate missing values
 df <- read.csv(dataset_path, na.strings = c("", "NA"))
 
 # Viewing the contents of a dataframe
 View(df)
 
-# Assuming there are commas in the numeric values while converting columns to numeric
-df$odometer_in_km <- as.numeric(gsub(",", "", df$odometer_in_km))
-
-# Creating a scatter plot
-ggplot(df, aes(x = odometer_in_km, y = price_in_EUR)) +
-  geom_point(alpha = 0.5, color = "blue") +
-  labs(title = "Scatter Plot: Relationship between Kilometers Traveled and Car Price", x = "Kilometers Traveled", y = "Car Price")
-
-# Creating a scatter plot
-ggplot(df, aes(x = powerPS, y = price_in_EUR)) +
-  geom_point(alpha = 0.5, color = "green") +
-  labs(title = "Scatter Plot: Horsepower vs. Car Price", x = "Horsepower (powerPS)", y = "Car Price (EUR)")
-
-
-# Calculate percentages using dplyr and forcats
+# Calculate percentages of gearbox types using dplyr and forcats
 df_percent <- df %>%
   group_by(gearbox) %>%
   summarise(count = n()) %>%
@@ -41,26 +26,33 @@ ggplot(df_percent, aes(x = "", y = percentage, fill = gearbox)) +
   coord_polar(theta = "y") +
   geom_text(aes(label = sprintf("%.1f%%", percentage)),
             position = position_stack(vjust = 0.5)) +
-  labs(title = "Detailed Pie Chart: Distribution of Gearbox Types with Percentages") +
+  labs(title = "Distribution of Gearbox Types with Percentages",
+       fill = "Gearbox Type") +
   theme_void()
 
 # Creating a bar chart with different colors for the distribution of vehicle types
 ggplot(df, aes(x = fct_infreq(vehicleType), fill = vehicleType)) +
   geom_bar() +
-  labs(title = "Bar Chart: Distribution of Vehicle Types", x = "Vehicle Type", y = "Frequency") +
+  labs(title = "Distribution of Vehicle Types",
+       x = "Vehicle Type",
+       y = "Frequency") +
   theme(axis.text.x = element_text(angle = 0, hjust = 1, vjust = 1.1))
 
 # Creating a grouped bar chart for the relationship between vehicleType and gearbox
 ggplot(df, aes(x = vehicleType, fill = gearbox)) +
   geom_bar(position = "dodge", stat = "count", color = "black") +
-  labs(title = "Grouped Bar Chart: Relationship between Vehicle Type and Gearbox", x = "Vehicle Type", y = "Frequency") +
+  labs(title = "Relationship between Vehicle Type and Gearbox",
+       x = "Vehicle Type",
+       y = "Frequency") +
   theme(axis.text.x = element_text(angle = 0, hjust = 1, vjust = 1.1))
 
 # Creating a grouped bar chart for the relationship between powerPS and vehicleType
 ggplot(df, aes(x = vehicleType, y = powerPS, fill = vehicleType)) +
   geom_bar(stat = "summary", fun = "mean", position = "dodge", color = "black") +
   scale_fill_brewer(palette = "Set2") +  # Set the color palette
-  labs(title = "Grouped Bar Chart: Relationship between Horsepower and Vehicle Type", x = "Vehicle Type", y = "Average Horsepower") +
+  labs(title = "Relationship between Horsepower and Vehicle Type",
+       x = "Vehicle Type",
+       y = "Average Horsepower") +
   theme(axis.text.x = element_text(angle = 0, hjust = 1, vjust = 1.1))
 
 # Calculate average price for each unique vehicle type
@@ -77,7 +69,7 @@ ggplot(avg_price_by_vehicle_type, aes(x = vehicleType, y = avg_price, fill = veh
   theme_minimal() +
   scale_fill_manual(values = rainbow(nrow(avg_price_by_vehicle_type)))
 
-# Calculate percentages using dplyr and forcats
+# Calculate percentages using dplyr and forcats for fuel types
 df_percent <- df %>%
   group_by(fuelType) %>%
   summarise(count = n()) %>%
@@ -90,6 +82,26 @@ ggplot(df_percent, aes(x = "", y = percentage, fill = fuelType)) +
   geom_text_repel(aes(label = sprintf("%s\n%.1f%%", fuelType, percentage)),
                   position = position_stack(vjust = 0.5),
                   color = "black", size = 3) +
-  labs(title = "Detailed Pie Chart: Distribution of Fuel Types with Percentages") +
+  labs(title = "Distribution of Fuel Types with Percentages",
+       fill = "Fuel Type") +
   theme_void()
+
+# Count the occurrences of each brand
+brand_counts <- table(df$brand)
+
+# Convert to data frame
+brand_df <- data.frame(brand = names(brand_counts), count = as.numeric(brand_counts))
+
+# Sort by count in descending order and take the top N brands
+top_brands <- head(brand_df[order(-brand_df$count), ], 10)  # Adjust '10' as needed
+
+# Create a horizontal bar chart for the top N brands with a color palette
+ggplot(top_brands, aes(x = reorder(brand, -count), y = count, fill = brand)) +
+  geom_bar(stat = "identity", color = "black") +
+  scale_fill_viridis(discrete = TRUE) +  # Using viridis color palette
+  labs(title = "Top Car Brands",
+       x = "Car Brands",
+       y = "Count") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 
