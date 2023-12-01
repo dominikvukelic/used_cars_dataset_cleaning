@@ -4,6 +4,7 @@ library(tidyverse)
 library(dplyr)
 library(forcats)
 library(RColorBrewer)
+library(ggrepel)
 
 # Specifying the relative path to your dataset within the project
 dataset_path <- "cleaned starting file/cleaned_autos.csv"
@@ -51,13 +52,13 @@ ggplot(df, aes(x = fct_infreq(vehicleType), fill = vehicleType)) +
 
 # Creating a grouped bar chart for the relationship between vehicleType and gearbox
 ggplot(df, aes(x = vehicleType, fill = gearbox)) +
-  geom_bar(position = "dodge", stat = "count", , color = "black") +
+  geom_bar(position = "dodge", stat = "count", color = "black") +
   labs(title = "Grouped Bar Chart: Relationship between Vehicle Type and Gearbox", x = "Vehicle Type", y = "Frequency") +
   theme(axis.text.x = element_text(angle = 0, hjust = 1, vjust = 1.1))
 
 # Creating a grouped bar chart for the relationship between powerPS and vehicleType
 ggplot(df, aes(x = vehicleType, y = powerPS, fill = vehicleType)) +
-  geom_bar(stat = "summary", fun = "mean", position = "dodge", , color = "black") +
+  geom_bar(stat = "summary", fun = "mean", position = "dodge", color = "black") +
   scale_fill_brewer(palette = "Set2") +  # Set the color palette
   labs(title = "Grouped Bar Chart: Relationship between Horsepower and Vehicle Type", x = "Vehicle Type", y = "Average Horsepower") +
   theme(axis.text.x = element_text(angle = 0, hjust = 1, vjust = 1.1))
@@ -75,3 +76,20 @@ ggplot(avg_price_by_vehicle_type, aes(x = vehicleType, y = avg_price, fill = veh
        y = "Average Price in EUR") +
   theme_minimal() +
   scale_fill_manual(values = rainbow(nrow(avg_price_by_vehicle_type)))
+
+# Calculate percentages using dplyr and forcats
+df_percent <- df %>%
+  group_by(fuelType) %>%
+  summarise(count = n()) %>%
+  mutate(percentage = count / sum(count) * 100)
+
+# Creating a pie chart with percentages and preventing text overlap
+ggplot(df_percent, aes(x = "", y = percentage, fill = fuelType)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  geom_text_repel(aes(label = sprintf("%s\n%.1f%%", fuelType, percentage)),
+                  position = position_stack(vjust = 0.5),
+                  color = "black", size = 3) +
+  labs(title = "Detailed Pie Chart: Distribution of Fuel Types with Percentages") +
+  theme_void()
+
