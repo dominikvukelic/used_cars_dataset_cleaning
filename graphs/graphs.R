@@ -32,7 +32,9 @@ ggplot(df_percent, aes(x = "", y = percentage, fill = gearbox)) +
 
 # Creating a bar chart with different colors for the distribution of vehicle types
 ggplot(df, aes(x = fct_infreq(vehicleType), fill = vehicleType)) +
-  geom_bar() +
+  geom_bar(color = "black",       # Set the outline color to black
+           size = 0.5,              # Set the outline size
+           position = "dodge") +  # Use dodge position for grouped bars
   labs(title = "Distribution of Vehicle Types",
        x = "Vehicle Type",
        y = "Frequency") +
