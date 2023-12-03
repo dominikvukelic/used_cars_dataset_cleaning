@@ -126,3 +126,15 @@ ggplot(df, aes(x = odometer_in_km, y = price_in_EUR)) +
        x = "Mileage (Odometer in km)",
        y = "Price in EUR") +
   theme_minimal()
+
+# Creating a bar chart with different colors for the distribution of Fuel types
+ggplot(df, aes(x = fct_infreq(fuelType), fill = fuelType)) +
+  geom_bar(color = "black", size = 0.5, position = "dodge", show.legend = FALSE) +
+  geom_text(stat = "count", aes(label = stat(count)), position = position_dodge(width = 0.9), vjust = -0.5) +  # Add numbers into the bars
+  labs(title = "Distribution of Fuel Types",
+       x = "Fuel Type",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 1.1),
+        axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)),
+        plot.title = element_text(hjust = 0.5))
