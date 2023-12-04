@@ -20,6 +20,7 @@ dataset_path <- "C:\\Users\\Hectic\\Documents\\used_cars_dataset_cleaning\\clean
 
 df <- read.csv(dataset_path, na.strings = c("", "NA"))
 ```
+
 # Creating a pie chart with percentages for gearbox type
 
 ```{r}
@@ -87,7 +88,7 @@ ggplot(df, aes(x = vehicleType, y = powerPS, fill = vehicleType)) +
   theme(axis.text.x = element_text(angle = 0, hjust = 1, vjust = 1.1))
 ```
 
-# Plot the bar chart for Average Price for Different Vehicle Types
+# Creating a bar chart for Average Price for Different Vehicle Types
 
 ```{r}
 
@@ -116,7 +117,7 @@ ggplot(avg_price_by_vehicle_type, aes(x = vehicleType, y = avg_price, fill = veh
   scale_fill_manual(values = rainbow(nrow(avg_price_by_vehicle_type)))
 ```
 
-# Plot a horizontal bar chart for the top 10 car brands
+# Creating a horizontal bar chart for the top 10 car brands
 
 ```{r}
 # Count the occurrences of each brand
@@ -141,7 +142,7 @@ ggplot(top_brands, aes(x = reorder(brand, -count), y = count, fill = brand)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 ```
 
-# Box plot: Price Distribution by Fuel Type
+# Creating a box plot: Price Distribution by Fuel Type
 
 ```{r}
 ggplot(df, aes(x = fuelType, y = price_in_EUR)) +
@@ -152,7 +153,7 @@ ggplot(df, aes(x = fuelType, y = price_in_EUR)) +
   theme_minimal()
 ```
 
-# Scatter Plot: Price vs. Mileage
+# Creating a scatter Plot: Price vs. Mileage
 
 ```{r}
 ggplot(df, aes(x = odometer_in_km, y = price_in_EUR)) +
@@ -163,7 +164,7 @@ ggplot(df, aes(x = odometer_in_km, y = price_in_EUR)) +
   theme_minimal()
 ```
 
-# Plot a bar chart with different colors for the distribution of Fuel types
+# Creating a bar chart with different colors for the distribution of Fuel types
 
 ```{r}
 ggplot(df, aes(x = fct_infreq(fuelType), fill = fuelType)) +

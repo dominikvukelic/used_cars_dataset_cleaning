@@ -18,22 +18,22 @@ Dominik Vukelic
 
 ![](markdown_graphs_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
-# Plot the bar chart for Average Price for Different Vehicle Types
+# Creating a bar chart for Average Price for Different Vehicle Types
 
 ![](markdown_graphs_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
-# Plot a horizontal bar chart for the top 10 car brands
+# Creating a horizontal bar chart for the top 10 car brands
 
 ![](markdown_graphs_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
-# Box plot: Price Distribution by Fuel Type
+# Creating a box plot: Price Distribution by Fuel Type
 
 ![](markdown_graphs_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
-# Scatter Plot: Price vs. Mileage
+# Creating a scatter Plot: Price vs. Mileage
 
 ![](markdown_graphs_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
-# Plot a bar chart with different colors for the distribution of Fuel types
+# Creating a bar chart with different colors for the distribution of Fuel types
 
 ![](markdown_graphs_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
