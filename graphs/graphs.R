@@ -79,7 +79,7 @@ max_avg_price <- avg_price_by_vehicle_type %>%
 # Reorder the vehicleType factor based on max_avg_price
 avg_price_by_vehicle_type$vehicleType <- factor(avg_price_by_vehicle_type$vehicleType, levels = max_avg_price)
 
-# Plot the bar chart
+# Plot the bar chart for Average Price for Different Vehicle Types
 ggplot(avg_price_by_vehicle_type, aes(x = vehicleType, y = avg_price, fill = vehicleType)) +
   geom_bar(stat = "identity", position = "dodge", color = "black", show.legend = FALSE) +
   labs(title = "Average Price for Different Vehicle Types",
