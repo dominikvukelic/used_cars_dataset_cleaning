@@ -135,6 +135,7 @@ top_brands <- brand_df %>%
 # Create a horizontal bar chart for the top 10 brands with a color palette
 ggplot(top_brands, aes(x = reorder(brand, -count), y = count, fill = brand)) +
   geom_bar(stat = "identity", color = "black", show.legend = FALSE) +
+  geom_text(aes(label = count), hjust = 0.5, vjust = -1) +  # Add numbers above bars
   scale_fill_viridis(discrete = TRUE) +  # Using viridis color palette
   labs(title = "Top 10 Car Brands",
        x = "Car Brands",
