@@ -26,14 +26,10 @@ Dominik Vukelic
 
 ![](markdown_graphs_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
-# Creating a box plot: Price Distribution by Fuel Type
+# Creating a scatter Plot: Price vs. Mileage
 
 ![](markdown_graphs_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
-# Creating a scatter Plot: Price vs. Mileage
-
-![](markdown_graphs_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
-
 # Creating a bar chart with different colors for the distribution of Fuel types
 
-![](markdown_graphs_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](markdown_graphs_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->

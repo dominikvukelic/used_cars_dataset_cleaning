@@ -113,15 +113,6 @@ ggplot(top_brands, aes(x = reorder(brand, -count), y = count, fill = brand)) +
   coord_cartesian(ylim = c(0, max(top_brands$count) * 1.2))
 
 
-
-# Box plot: Price Distribution by Fuel Type
-ggplot(df, aes(x = fuelType, y = price_in_EUR)) +
-  geom_boxplot(fill = "skyblue", color = "black") +
-  labs(title = "Price Distribution by Fuel Type",
-       x = "Fuel Type",
-       y = "Price in EUR") +
-  theme_minimal()
-
 # Scatter Plot: Price vs. Mileage
 ggplot(df, aes(x = odometer_in_km, y = price_in_EUR)) +
   geom_point(color = "blue", alpha = 0.5) +
