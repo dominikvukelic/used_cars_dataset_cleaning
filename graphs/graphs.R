@@ -112,15 +112,6 @@ ggplot(top_brands, aes(x = reorder(brand, -count), y = count, fill = brand)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
   coord_cartesian(ylim = c(0, max(top_brands$count) * 1.2))
 
-
-# Scatter Plot: Price vs. Mileage
-ggplot(df, aes(x = odometer_in_km, y = price_in_EUR)) +
-  geom_point(color = "blue", alpha = 0.5) +
-  labs(title = "Price vs. Mileage",
-       x = "Mileage (Odometer in km)",
-       y = "Price in EUR") +
-  theme_minimal()
-
 # Creating a bar chart with different colors for the distribution of Fuel types
 ggplot(df, aes(x = fct_infreq(fuelType), fill = fuelType)) +
   geom_bar(color = "black", size = 0.5, position = "dodge", show.legend = FALSE) +

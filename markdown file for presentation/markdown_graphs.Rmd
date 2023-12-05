@@ -146,17 +146,6 @@ ggplot(top_brands, aes(x = reorder(brand, -count), y = count, fill = brand)) +
 
 ```
 
-# Creating a scatter Plot: Price vs. Mileage
-
-```{r}
-ggplot(df, aes(x = odometer_in_km, y = price_in_EUR)) +
-  geom_point(color = "blue", alpha = 0.5) +
-  labs(title = "Price vs. Mileage",
-       x = "Mileage (Odometer in km)",
-       y = "Price in EUR") +
-  theme_minimal()
-```
-
 # Creating a bar chart with different colors for the distribution of Fuel types
 
 ```{r}
