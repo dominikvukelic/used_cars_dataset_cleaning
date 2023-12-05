@@ -122,4 +122,5 @@ ggplot(df, aes(x = fct_infreq(fuelType), fill = fuelType)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 1.1),
         axis.title.y = element_text(margin = margin(t = 0, r = 10, b = 0, l = 0)),
-        plot.title = element_text(hjust = 0.5))
+        plot.title = element_text(hjust = 0.5)) +
+  coord_cartesian(ylim = c(0, max(table(df$fuelType)) * 1.2))
