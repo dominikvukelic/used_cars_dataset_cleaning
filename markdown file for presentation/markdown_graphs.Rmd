@@ -30,7 +30,7 @@ df_percent <- df %>%
   mutate(percentage = n / sum(n) * 100)
 
 ggplot(df_percent, aes(x = "", y = percentage, fill = gearbox)) +
-  geom_bar(stat = "identity", width = 1) +
+  geom_bar(stat = "identity", width = 1,  color = "black") +
   coord_polar(theta = "y") +
   geom_text(aes(label = sprintf("%.1f%%", percentage)),
             position = position_stack(vjust = 0.5)) +

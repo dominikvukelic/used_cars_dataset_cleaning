@@ -21,7 +21,7 @@ df_percent <- df %>%
 
 # Creating a pie chart with percentages for gearbox type
 ggplot(df_percent, aes(x = "", y = percentage, fill = gearbox)) +
-  geom_bar(stat = "identity", width = 1) +
+  geom_bar(stat = "identity", width = 1, color = "black") +
   coord_polar(theta = "y") +
   geom_text(aes(label = sprintf("%.1f%%", percentage)),
             position = position_stack(vjust = 0.5)) +
