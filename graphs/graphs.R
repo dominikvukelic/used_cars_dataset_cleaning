@@ -109,7 +109,8 @@ ggplot(top_brands, aes(x = reorder(brand, -count), y = count, fill = brand)) +
        x = "Car Brands",
        y = "Count") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  coord_cartesian(ylim = c(0, max(top_brands$count) * 1.2))
 
 
 
