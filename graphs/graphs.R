@@ -82,6 +82,7 @@ avg_price_by_vehicle_type$vehicleType <- factor(avg_price_by_vehicle_type$vehicl
 # Plot the bar chart for Average Price for Different Vehicle Types
 ggplot(avg_price_by_vehicle_type, aes(x = vehicleType, y = avg_price, fill = vehicleType)) +
   geom_bar(stat = "identity", position = "dodge", color = "black", show.legend = FALSE) +
+  geom_text(aes(label = round(avg_price)), position = position_dodge(width = 0.9), vjust = -0.5) +  # Add numbers above bars
   labs(title = "Average Price for Different Vehicle Types",
        x = "Vehicle Type",
        y = "Average Price in EUR") +
