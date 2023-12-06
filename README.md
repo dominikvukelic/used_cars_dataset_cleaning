@@ -11,7 +11,7 @@ This project centers on the meticulous analysis and cleaning of a Kaggle-acquire
 - **`starting_file/`**: Contains the original dataset from Kaggle.
   - `autos.csv`: The raw data file downloaded from Kaggle.
  
-  - **`cleaning starting file/`**: Contains R script for data cleaning and analysis.
+- **`cleaning starting file/`**: Contains R script for data cleaning and analysis.
   - `autos_df.R`: R script for cleaning and processing the dataset.
 
 - **`cleaned starting file/`**: Contains the cleaned dataset exported from R.
