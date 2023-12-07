@@ -4,7 +4,7 @@
 
 ## Overview
 
-This project centers on the meticulous analysis and cleaning of a Kaggle-acquired dataset, focusing on various attributes related to used cars. The primary objectives include processing and cleaning the data, discerning key trends, and crafting visualizations to derive meaningful insights.
+This project focuses on a comprehensive analysis and cleaning process applied to a dataset obtained from Kaggle, specifically centered around attributes related to used cars. The primary goals include data processing, thorough cleaning, identification of key trends, and the creation of visualizations to extract meaningful insights.
 
 ## Repository Structure
 
