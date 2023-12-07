@@ -1,6 +1,5 @@
 # used_cars_dataset_cleaning
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Overview
 
@@ -29,7 +28,3 @@ This project focuses on a comprehensive analysis and cleaning process applied to
 ## Usage
 
 Explore the cleaned dataset and leverage the insights gained from the analysis.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE). See the [LICENSE](LICENSE) file for details.
