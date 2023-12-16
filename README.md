@@ -17,7 +17,7 @@ This project focuses on a comprehensive analysis and cleaning process applied to
   - `autos_cleaned.csv`: The cleaned and processed dataset, ready for analysis.
  
 - **`graphs/`**: Contains R script for data visualization.
-  - `autos_cleaned.csv`: R script for analyzing the cleaned dataset and generating visualizations.
+  - `graphs.R`: R script for analyzing the cleaned dataset and generating visualizations.
  
 - **`markdown file for presentation/`**: Contains R markdown for data visualization.
   - `figure-gfm`: folder which contains image files referenced in the Markdown document.
