@@ -5,8 +5,8 @@ library(RColorBrewer)
 library(ggrepel)
 library(viridis)
 
-# Specifying the relative path to your dataset within the project
-dataset_path <- "cleaned starting file/cleaned_autos.csv"
+# Specify the relative path to your dataset within the project
+dataset_path <- file.path('cleaned starting file', 'cleaned_autos.csv')
 
 # Importing the dataset using read.csv with na.strings parameter to indicate missing values
 df <- read.csv(dataset_path, na.strings = c("", "NA"))
