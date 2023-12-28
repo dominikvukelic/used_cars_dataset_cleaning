@@ -1,11 +1,14 @@
 # Importing necessary libraries
 library(tidyverse)
 
-# Specify the relative path to your dataset within the project
-dataset_path <- "starting file/autos.csv"
+# Specify the relative path to the starting CSV file from the current working directory
+relative_path <- file.path('starting file', 'autos.csv')
 
-# Import the dataset using read.csv with a.strings parameter to indicate the values that should be treated as missing (blank)
-df <- read.csv(dataset_path, na.strings = c("", "NA"))
+# Construct the absolute path
+absolute_path <- normalizePath(relative_path)
+
+# Read the CSV file into a DataFrame
+df <- read.csv(absolute_path, na.strings = c("", "NA"))
 
 # View the contents of a dataframe
 View(df)
@@ -157,8 +160,8 @@ df <- df %>%
     )
   )
 
-# Specifying the path for the cleaned CSV file
-cleaned_file_path <- "cleaned starting file/cleaned_autos.csv"
+# Specify the path for the cleaned CSV file
+cleaned_file_path <- file.path('cleaned starting file', 'cleaned_autos.csv')
 
 # Writing the cleaned DataFrame to a new CSV file
 write.csv(df, file = cleaned_file_path, row.names = FALSE)
