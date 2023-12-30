@@ -1,6 +1,5 @@
 # used_cars_dataset_cleaning
 
-
 ## Overview
 
 This project focuses on a comprehensive analysis and cleaning process applied to a dataset obtained from Kaggle, specifically centered around attributes related to used cars. The primary goals include data processing, thorough cleaning, identification of key trends, and the creation of visualizations to extract meaningful insights.
@@ -24,7 +23,11 @@ This project focuses on a comprehensive analysis and cleaning process applied to
   - `markdown_graphs.Rmd`: R Markdown file which contains a mix of Markdown text and embedded R code, possibly generating graphs or other visual elements when rendered.
   - `markdown_graphs.md`: Knitted version of R Markdown file for presentational purposes whose output is set as a GitHub document.
 
-
 ## Usage
 
 Explore the cleaned dataset and leverage the insights gained from the analysis.
+
+## Tableau Viz
+```html
+<!-- https://public.tableau.com/app/profile/dominikvukelic/viz/UsedCars_17037756185540/CarsDashboard -->
+
