@@ -28,6 +28,9 @@ This project focuses on a comprehensive analysis and cleaning process applied to
 Explore the cleaned dataset and leverage the insights gained from the analysis.
 
 ## Tableau Viz
-```html
-<!-- https://public.tableau.com/app/profile/dominikvukelic/viz/UsedCars_17037756185540/CarsDashboard -->
+
+Explore the interactive Tableau visualization to gain additional insights:
+
+[Tableau Viz - Used Cars in Germany Dashboard](https://public.tableau.com/app/profile/dominikvukelic/viz/UsedCars_17037756185540/CarsDashboard)
+
 
